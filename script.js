@@ -120,25 +120,27 @@ const generateBuying = (value, container) => {
 }
 const generateCrafting = (value, container) => {
     let calcValue = parseFloat(value);
+    let useCrystal = false;
     
     if(remainingCrystal > 0) {
         remainingCrystal -= 1;
-    } else {
-        let row = document.createElement('div');
-        row.classList.add('row');
-        row.innerHTML = `
-            <p class='result'>${buildMoney(calcValue - 5 - parseFloat(crystalPrice.value))} = </p>
-            <p class="reason">Craft Divine Accessory of Holy Beast</p>
-            <p>
-                ${buildMoney(calcValue)} (Starting Amount) 
-                - ${buildMoney(5)} (Crafting Cost) 
-                - ${buildMoney(parseFloat(crystalPrice.value))} (Divine Crystal Cost)
-            </p>
-        `;
-        container.appendChild(row);
-
-        calcValue = calcValue - 5 - parseFloat(crystalPrice.value);
+        useCrystal = true;
     }
+    let row3 = document.createElement('div');
+    row3.classList.add('row');
+    row3.innerHTML = `
+        <p class='result'>${buildMoney(calcValue - 5 - parseFloat(useCrystal ? 0 : crystalPrice.value))} = </p>
+        <p class="reason">Craft Divine Accessory of Holy Beast</p>
+        <p>
+            ${buildMoney(calcValue)} (Starting Amount) 
+            - ${buildMoney(5)} (Crafting Cost) 
+            - ${buildMoney(parseFloat(useCrystal ? 0 : crystalPrice.value))} (Divine Crystal Cost)
+        </p>
+    `;
+    container.appendChild(row3);
+
+    calcValue = calcValue - 5 - parseFloat(useCrystal ? 0 : crystalPrice.value);
+    
 
     if (remainingGear > 0) {
         remainingGear -= 1;
