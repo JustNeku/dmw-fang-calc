@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fanglongmon Gear Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/assets/Fanglongmon's_Ancient_Earring_Lv.webp" type="image/x-icon">
+    <script type="importmap">
+        {
+            "imports": {
+                "@material/web/": "https://esm.run/@material/web/"
+            }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Fanglongmon Ultimate Gear Calculator</h1>
+            <button class="requirements" onclick="openModal()">Requirements/Information</button>
+        </header>
+        <main>
+            <div class="inputs">
+                <details open>
+                    <summary>Materials in Possession</summary>
+                    <div class="content">
+                        <p class="info">Input how many <span>Fanronkou</span> and <span>Divine Crystal</span> are already in your possession.</p>
+                        <p class="info">Those will be used before money gets spent to buy more of the corresponding item.</p>
+                        <div class="slider-container">
+                            <div><img src="./assets/Fanronkou.webp" alt="">Fanronkou</div>
+                            <md-slider max="390" value="0" labeled id="fan-start"></md-slider>
+                            <p class="count" id="label-fan-start">0</p>
+    
+                            <div><img src="./assets/Divine_Crystal.webp" alt="">Divine Crystal</div>
+                            <md-slider max="3" value="0" labeled id="crystal-start"></md-slider>
+                            <p class="count" id="label-crystal-start">0</p>
+    
+                            <div><img src="./assets/Fanglongmon's_Ancient_Earring_LvG.webp" alt="">Fang Gear Lv.1</div>
+                            <md-slider max="3" value="0" labeled id="gear-start"></md-slider>
+                            <p class="count" id="label-gear-start">0</p>
+                        </div>
+                    </div>
+                </details>
+                <hr>
+                <details open>
+                    <summary>Predicted Values</summary>
+                    <div class="content">
+                        <p class="info">Input your starting money and predicted prices you are going to pay for items.</p>
+                        <p class="info">Additionally input the value you predict to sell finished Gear pieces for.</p>
+                        <div class="slider-container">
+                            <div><img src="./assets/The_Really_Rich.webp" alt="">Starting Tera</div>
+                            <md-slider max="999" value="650" labeled id="tera"></md-slider>
+                            <p class="count"><span id="label-tera">650</span><img src="./assets/Currency_Tera.webp" alt=""></p>
+    
+                            <div><img class="cost" src="./assets/Fanglongmon's_Ancient_Earring_Lv.webp" alt="">Ultimate Gear Buying Price</div>
+                            <md-slider min="200" max="500" value="300" labeled id="gear-cost"></md-slider>
+                            <p class="count"><span id="label-gear-cost">300</span><img src="./assets/Currency_Tera.webp" alt=""></p>
+    
+                            <div><img class="sell" src="./assets/Fanglongmon's_Ancient_Earring_Lv.webp" alt="">Ultimate Gear Selling Price</div>
+                            <md-slider min="200" max="500" value="350" labeled id="gear-sell"></md-slider>
+                            <p class="count"><span id="label-gear-sell">350</span><img src="./assets/Currency_Tera.webp" alt=""></p>
+    
+                            <div><img src="./assets/Fanronkou.webp" alt="">Fanronkou Price</div>
+                            <md-slider min="0" max="2" value="1.1" step="0.05" labeled id="fan-price"></md-slider>
+                            <p class="count">
+                                <span id="label-fan-price-tera">1</span><img src="./assets/Currency_Tera.webp" alt="">
+                                <span id="label-fan-price-mega">100</span><img src="./assets/Currency_Mega.webp" alt="">
+                            </p>
+    
+                            <div><img src="./assets/Divine_Crystal.webp" alt="">Divine Crystal Price</div>
+                            <md-slider min="30" max="50" value="40" labeled id="crystal-price"></md-slider>
+                            <p class="count">
+                                <span id="label-crystal-price">40</span><img src="./assets/Currency_Tera.webp" alt="">
+                            </p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            <div class="outputs">
+                <details id="out-bgp1">
+                    <summary>
+                        <span id="out-bgp1-tera">350</span><img src="/assets/Currency_Tera.webp">
+                        <span id="out-bgp1-mega">350</span><img src="/assets/Currency_Mega.webp">
+                        <span>[Buying] Gear Piece 1</span>
+                    </summary>
+                </details>
+                <details id="out-cgp1">
+                    <summary>
+                        <span id="out-cgp1-tera">350</span><img src="/assets/Currency_Tera.webp">
+                        <span id="out-cgp1-mega">350</span><img src="/assets/Currency_Mega.webp">
+                        <span>[Crafting] Gear Piece 1</span>
+                    </summary>
+                </details>
+                <details id="out-sgp1">
+                    <summary>
+                        <span id="out-sgp1-tera">350</span><img src="/assets/Currency_Tera.webp">
+                        <span id="out-sgp1-mega">350</span><img src="/assets/Currency_Mega.webp">
+                        <span>[Selling] Gear Piece 1</span>
+                    </summary>
+                </details>
+                <details id="out-bgp2">
+                    <summary>
+                        <span id="out-bgp2-tera">350</span><img src="/assets/Currency_Tera.webp">
+                        <span id="out-bgp2-mega">350</span><img src="/assets/Currency_Mega.webp">
+                        <span>[Buying] Gear Piece 2</span>
+                    </summary>
+                </details>
+                <details id="out-cgp2">
+                    <summary>
+                        <span id="out-cgp2-tera">350</span><img src="/assets/Currency_Tera.webp">
+                        <span id="out-cgp2-mega">350</span><img src="/assets/Currency_Mega.webp">
+                        <span>[Crafting] Gear Piece 2</span>
+                    </summary>
+                </details>
+                <details id="out-sgp2">
+                    <summary>
+                        <span id="out-sgp2-tera">350</span><img src="/assets/Currency_Tera.webp">
+                        <span id="out-sgp2-mega">350</span><img src="/assets/Currency_Mega.webp">
+                        <span>[Selling] Gear Piece 2</span>
+                    </summary>
+                </details>
+                <details id="out-bgp3">
+                    <summary>
+                        <span id="out-bgp3-tera">350</span><img src="/assets/Currency_Tera.webp">
+                        <span id="out-bgp3-mega">350</span><img src="/assets/Currency_Mega.webp">
+                        <span>[Buying] Gear Piece 3</span>
+                    </summary>
+                </details>
+                <details id="out-cgp3" class="optional">
+                    <summary>
+                        <span id="out-cgp3-tera">350</span><img src="/assets/Currency_Tera.webp">
+                        <span id="out-cgp3-mega">350</span><img src="/assets/Currency_Mega.webp">
+                        <span>[Crafting] Gear Piece 3</span>
+                    </summary>
+                </details>
+                <details id="out-sgp3" class="optional">
+                    <summary>
+                        <span id="out-sgp3-tera">350</span><img src="/assets/Currency_Tera.webp">
+                        <span id="out-sgp3-mega">350</span><img src="/assets/Currency_Mega.webp">
+                        <span>[Selling] Gear Piece 3</span>
+                    </summary>
+                </details>
+            </div>
+        </main>
+    </div>
+
+    <dialog id="requirements-modal" closedby="any">
+        <h2>Requirements</h2>
+        <div class="content">
+            <p>To use this Calculator you need the following:</p>
+            <p><img src="./assets/Fanglongmon_Voucher.webp" alt="">You have to be able to still claim all three
+                <span>Fanglongmon Gear Vouchers</span>
+            </p>
+            <p><img src="./assets/HBRad5_Earrings.webp" alt="">You have the <span>Divine Accessories of Four Holy
+                    Beasts</span></p>
+        </div>
+        <h2>Information</h2>
+        <div class="content">
+            <p>How does this work exactly?</p>
+            <p>Input your values: Starting Money Amount, what you predict you have to pay for resources, etc.</p>
+            <p>Add what you already have on you.</p>
+            <p>The calculator does the following:</p>
+            <p>- Buy your first Ultimate Fang Piece</p>
+            <p>- With the Voucher you obtain craft the same piece again</p>
+            <p>- Sell it to get a partial return of investment</p>
+            <p>- Repeat until all Gear pieces are bought.</p>
+            <p>The last two steps are optional, they get you some money back.</p>
+        </div>
+        <div class="actions">
+            <button class="requirements" onclick="closeModal()">Understood!</button>
+        </div>
+    </dialog>
+    <script src="script.js"></script>
+</body>
+
+</html>
