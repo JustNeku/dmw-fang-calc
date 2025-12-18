@@ -198,7 +198,7 @@ dialog {
             color: rgb(255, 181, 181);
         }
 
-        summary, .row p, .result {
+        .row p, .result {
             cursor: pointer;
             display: flex;
             gap: 0.25rem;
@@ -214,6 +214,15 @@ dialog {
 
             span:last-child {
                 margin-left: 0.5rem;
+            }
+        }
+
+        summary {
+            cursor: pointer;
+
+            img {
+                display: inline-block;
+                margin-inline: 0.25rem;
             }
         }
 
