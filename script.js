@@ -230,8 +230,8 @@ const buildMoney = (value) => {
     let mega = Math.abs(Math.round((value % 1) * 1000));
 
     return `
-        <span>${leadingZero(tera)}</span><img src='/assets/Currency_Tera.webp'>
-        <span>${leadingZero(mega)}</span><img src='/assets/Currency_Mega.webp'>
+        <span>${leadingZero(tera)}</span><img src='./assets/Currency_Tera.webp'>
+        <span>${leadingZero(mega)}</span><img src='./assets/Currency_Mega.webp'>
     `
 }
 
