@@ -134,7 +134,7 @@ const generateCrafting = (value, container) => {
         <p>
             ${buildMoney(calcValue)} (Starting Amount) 
             - ${buildMoney(5)} (Crafting Cost) 
-            - ${buildMoney(parseFloat(useCrystal ? 0 : crystalPrice.value))} (Divine Crystal Cost)
+            - ${buildMoney(parseFloat(useCrystal ? 0 : crystalPrice.value))} (${useCrystal ? 0 : 1} Divine Crystal bought)
         </p>
     `;
     container.appendChild(row3);
